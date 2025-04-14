@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  icon-api:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5000 
